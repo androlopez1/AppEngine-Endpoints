@@ -1,0 +1,25 @@
+runtime: python27
+threadsafe: true
+api_version: 1
+
+handlers:
+# Endpoints handler
+- url: /_ah/api/.*
+  script: main.application
+
+libraries:
+# Needed for endpoints/users_id_token.py.
+- name: pycrypto
+  version: "2.6"
+- name: endpoints
+  version: 1.0
+- name: ssl
+  version: latest
+
+# [START env_vars]
+env_variables:
+  # The following values are to be replaced by information from the output of
+  # 'gcloud endpoints services deploy swagger.json' command.
+  ENDPOINTS_SERVICE_NAME: merlin-endpoints.appspot.com
+  ENDPOINTS_SERVICE_VERSION: 2018-07-17r0
+ # [END env_vars]
